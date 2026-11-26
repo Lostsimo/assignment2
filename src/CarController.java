@@ -32,6 +32,7 @@ public class CarController {
             for (int i = 0; i < cars.size(); i++) {
                 Car car = cars.get(i);
                 car.move();
+                checkWalls(car);
                 int x = (int) Math.round(car.getX());
                 // flip y, otherwise "up" goes down on the screen
                 int y = maxY() - (int) Math.round(car.getY());
@@ -42,8 +43,27 @@ public class CarController {
         }
     }
 
+    private int maxX() {
+        return Math.max(0, frame.drawPanel.getWidth() - DrawPanel.CAR_WIDTH);
+    }
+
     private int maxY() {
         return Math.max(0, frame.drawPanel.getHeight() - DrawPanel.CAR_HEIGHT);
+    }
+
+    // stop, turn around and start again if the car is outside the panel
+    private void checkWalls(Car car) {
+        double x = car.getX();
+        double y = car.getY();
+        if (x < 0 || x > maxX() || y < 0 || y > maxY()) {
+            double newX = Math.max(0, Math.min(x, maxX()));
+            double newY = Math.max(0, Math.min(y, maxY()));
+            car.setPosition(newX, newY);
+            car.stopEngine();
+            car.turnLeft();
+            car.turnLeft();
+            car.startEngine();
+        }
     }
 
     // Calls the gas method for each car once
