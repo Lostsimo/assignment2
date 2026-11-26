@@ -7,6 +7,9 @@ import javax.swing.*;
 // This panel represents the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel {
+    static final int CAR_WIDTH = 100;
+    static final int CAR_HEIGHT = 60;
+
     // Just a single image, TODO: Generalize
     BufferedImage volvoImage;
     // To keep track of a single car's position
