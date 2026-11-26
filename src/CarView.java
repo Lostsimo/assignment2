@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
  * It initializes with being center on the screen and attaching its controller in its state.
  * It communicates with the Controller by calling its methods when an action fires in
  * its components.
- * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
 public class CarView extends JFrame {
@@ -93,10 +92,28 @@ public class CarView extends JFrame {
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
-        // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
         gasButton.addActionListener(e -> {
             carC.gas(gasAmount);
+        });
+
+        brakeButton.addActionListener(e -> {
+            carC.brake(gasAmount);
+        });
+
+        leftButton.addActionListener(e -> {
+            carC.turnLeft();
+        });
+
+        rightButton.addActionListener(e -> {
+            carC.turnRight();
+        });
+
+        startButton.addActionListener(e -> {
+            carC.startAllCars();
+        });
+
+        stopButton.addActionListener(e -> {
+            carC.stopAllCars();
         });
 
         // Make the panel layout more compact
